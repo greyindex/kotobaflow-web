@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jp-learning-workbench.local/schemas/resource-contracts.schema.json",
+  "title": "JP Learning Workbench resource contracts",
+  "description": "Named JSON Schema contracts used by the resource audit. File-to-contract mappings are documented in the adjacent README.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "vocabularyEntry": { "$ref": "#/$defs/vocabularyEntry" },
+    "grammarIndexEntry": { "$ref": "#/$defs/grammarIndexEntry" },
+    "grammarDetail": { "$ref": "#/$defs/grammarDetail" },
+    "grammarLesson": { "$ref": "#/$defs/grammarLesson" },
+    "textbookBundle": { "$ref": "#/$defs/textbookBundle" },
+    "textbookV4Entry": { "$ref": "#/$defs/textbookV4Entry" },
+    "jitendexEntry": { "$ref": "#/$defs/jitendexEntry" },
+    "textbookSentence": { "$ref": "#/$defs/textbookSentence" },
+    "wikiReading": { "$ref": "#/$defs/wikiReading" },
+    "audioManifestEntry": { "$ref": "#/$defs/audioManifestEntry" },
+    "userProgress": { "$ref": "#/$defs/userProgress" }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vocabularyEntry": {
+      "type": "object",
+      "required": ["index", "word", "reading_hiragana"],
+      "properties": {
+        "index": { "type": "integer", "minimum": 1 },
+        "word": { "$ref": "#/$defs/nonEmptyString" },
+        "reading_hiragana": { "type": "string" },
+        "level": { "type": "string" },
+        "meanings_zh": { "type": "array", "items": { "type": "string" } },
+        "example_sentences": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": true
+    },
+    "grammarIndexEntry": {
+      "type": "object",
+      "required": ["uid", "level", "index", "title"],
+      "properties": {
+        "uid": { "$ref": "#/$defs/nonEmptyString" },
+        "level": { "$ref": "#/$defs/nonEmptyString" },
+        "index": { "type": "integer", "minimum": 1 },
+        "title": { "$ref": "#/$defs/nonEmptyString" }
+      },
+      "additionalProperties": true
+    },
+    "grammarDetail": {
+      "type": "object",
+      "required": ["uid", "level", "index", "title"],
+      "properties": {
+        "uid": { "$ref": "#/$defs/nonEmptyString" },
+        "level": { "$ref": "#/$defs/nonEmptyString" },
+        "index": { "type": "integer", "minimum": 1 },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "originalExamples": { "type": "array", "items": { "type": "object" } },
+        "rewrittenExamples": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": true
+    },
+    "grammarLesson": {
+      "type": "object",
+      "required": ["lesson_id"],
+      "properties": {
+        "lesson_id": { "type": ["string", "integer"] },
+        "grammar_uids": { "type": "array", "items": { "type": "string" } },
+        "paragraphs_ja": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "textbookBundle": {
+      "type": "object",
+      "required": ["book_id", "index", "items"],
+      "properties": {
+        "book_id": { "$ref": "#/$defs/nonEmptyString" },
+        "index": { "type": "object" },
+        "items": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": true
+    },
+    "textbookV4Entry": {
+      "type": "object",
+      "required": ["index", "textbook_uid", "word", "reading_hiragana"],
+      "properties": {
+        "index": { "type": "integer", "minimum": 1 },
+        "textbook_uid": { "$ref": "#/$defs/nonEmptyString" },
+        "word": { "$ref": "#/$defs/nonEmptyString" },
+        "reading_hiragana": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "jitendexEntry": {
+      "type": "object",
+      "required": ["vocabIndex", "word"],
+      "properties": {
+        "vocabIndex": { "type": "integer", "minimum": 1 },
+        "word": { "$ref": "#/$defs/nonEmptyString" }
+      },
+      "additionalProperties": true
+    },
+    "textbookSentence": {
+      "type": "object",
+      "required": ["id", "book_id", "lesson_id", "text"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "book_id": { "$ref": "#/$defs/nonEmptyString" },
+        "lesson_id": { "$ref": "#/$defs/nonEmptyString" },
+        "text": { "$ref": "#/$defs/nonEmptyString" }
+      },
+      "additionalProperties": true
+    },
+    "wikiReading": {
+      "type": "object",
+      "required": ["bookId", "lessonId"],
+      "properties": {
+        "bookId": { "$ref": "#/$defs/nonEmptyString" },
+        "lessonId": { "$ref": "#/$defs/nonEmptyString" },
+        "sentences": { "type": "array", "items": { "type": "object" } }
+      },
+      "additionalProperties": true
+    },
+    "audioManifestEntry": {
+      "type": "object",
+      "properties": {
+        "index": { "type": "integer", "minimum": 1 },
+        "target_index": { "type": "integer", "minimum": 1 },
+        "audio_relpath": { "$ref": "#/$defs/nonEmptyString" },
+        "output": { "$ref": "#/$defs/nonEmptyString" },
+        "status": { "$ref": "#/$defs/nonEmptyString" }
+      },
+      "anyOf": [{ "required": ["audio_relpath"] }, { "required": ["output"] }],
+      "additionalProperties": true
+    },
+    "userProgress": {
+      "type": "object",
+      "required": ["version", "vocabulary", "navigation", "usage"],
+      "properties": {
+        "version": { "type": "integer", "minimum": 1 },
+        "revision": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "pending": { "type": "boolean" },
+        "readFailure": { "type": "boolean" },
+        "vocabulary": { "type": "object" },
+        "navigation": { "type": "object" },
+        "usage": { "type": "object" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

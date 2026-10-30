@@ -1,0 +1,10 @@
+node_modules/
+vendor/
+data/
+image/
+experiments/
+test-results/
+playwright-report/
+style.css
+index.html
+sw-manifest.js

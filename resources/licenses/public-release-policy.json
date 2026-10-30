@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "reviewDate": "2026-10-21",
+  "basis": "resources/licenses/THIRD_PARTY_NOTICES.md; resources/provenance/SOURCES.md; docs/FINAL_TODO.md W-08; historical P0-01",
+  "note": "Personal-project policy requested by the owner on 2026-09-21. Runtime packaging, private files, broken shell references and explicit resource blocks fail the release. Code changes need no per-file rights approval. Pending source families are non-blocking reminders, not claims of permission or completed review. Integrity hashes are generated automatically outside the public package. Since 2026-10-06 (PUB-05) the third-party XinBian textbooks stay local: their text, section audio, page images, lesson lists and catalogs are blocked, and the public package must offer only the original KotobaFlow curriculum. Since 2026-10-21 the classics reading library JSON is public and its full narrations are hosted in a dedicated R2 audio bucket.",
+  "blockedPaths": [
+    "image/XinBian1",
+    "image/XinBian2",
+    "image/XinBian3",
+    "image/XinBian4",
+    "data/gemini38_flash_tts_dialogue_sections_candidate_v1",
+    "data/gemini38_flash_tts_reading_sections_candidate_v1",
+    "data/gcloud_chirp3_vocab6127_female_aoede_v1/manifest.jsonl",
+    "data/textbook/book_chunks/XinBian1.json",
+    "data/textbook/book_chunks/XinBian2.json",
+    "data/textbook/book_chunks/XinBian3.json",
+    "data/textbook/book_chunks/XinBian4.json",
+    "data/textbook/canonical_books/XinBian1.bundle.json",
+    "data/textbook/canonical_books/XinBian2.bundle.json",
+    "data/textbook/canonical_books/XinBian3.bundle.json",
+    "data/textbook/canonical_books/XinBian4.bundle.json",
+    "data/textbook/canonical_textbook_vocab",
+    "data/textbook/canonical_textbook_grammar",
+    "data/textbook/textbook_text_chunks.v2.json",
+    "data/textbook/textbook_text_grammar_annotations.v1.json",
+    "data/wiki/processed"
+  ],
+  "pendingFamilies": [
+    "Main vocabulary and taxonomy provenance",
+    "Textbook text, examples and grammar",
+    "Jitendex/JMdict overlay notices and source snapshot",
+    "Wikipedia redistribution and attribution review",
+    "Google Cloud TTS output distribution scope",
+    "Qwen model/checkpoint and reference voice evidence",
+    "Textbook illustration provenance and distribution scope",
+    "Classics source editions, AI translation and narration provenance"
+  ]
+}

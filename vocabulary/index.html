@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+    <!-- Generated site metadata: npm run site:generate -->
+    <title>日语词汇查阅与复习 · 词基流动</title>
+    <meta name="description" content="按 JLPT 等级、词性和中文释义查阅日语词汇，查看读音、日中例句与关联词，支持朗读、收藏和间隔复习。">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://kotobaflow.lol/vocabulary/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="词基流动">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:title" content="日语词汇查阅与复习 · 词基流动">
+    <meta property="og:description" content="按 JLPT 等级、词性和中文释义查阅日语词汇，查看读音、日中例句与关联词，支持朗读、收藏和间隔复习。">
+    <meta property="og:url" content="https://kotobaflow.lol/vocabulary/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="日语词汇查阅与复习 · 词基流动">
+    <meta name="twitter:description" content="按 JLPT 等级、词性和中文释义查阅日语词汇，查看读音、日中例句与关联词，支持朗读、收藏和间隔复习。">
+    <script type="application/ld+json" id="sitePageSchema">{"@context":"https://schema.org","@type":"WebPage","name":"日语词汇查阅与复习 · 词基流动","description":"按 JLPT 等级、词性和中文释义查阅日语词汇，查看读音、日中例句与关联词，支持朗读、收藏和间隔复习。","url":"https://kotobaflow.lol/vocabulary/","inLanguage":"zh-CN","isPartOf":{"@type":"WebSite","name":"词基流动","url":"https://kotobaflow.lol/"}}</script>
+    <!-- End site metadata -->
+    <meta name="theme-color" content="#16181c">
+    <link rel="icon" href="./pwa-icon.svg?v=20260829-b05-1" type="image/svg+xml">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <script src="./js/display-scale.js?v=20260831-narrow-sidebar-3"></script>
+    <script src="./js/theme.js?v=20261016-ui-art-25-1"></script>
+    <script src="./js/appearance.js?v=20261019-ui-art-27-1"></script>
+    <script src="./js/display-density.js?v=20260827-ux502-1"></script>
+    <link rel="stylesheet" href="./style.css?v=20261031-apk-download-1">
+    <script src="./js/mobile-warning.js?v=20261031-apk-download-1"></script>
+    <script src="./js/icons.js?v=20261019-classics-1"></script>
+</head>
+<body class="focused-ui">
+    <div class="mobile-unsupported-overlay" id="mobileUnsupportedNotice" hidden>
+        <section class="mobile-unsupported-dialog" role="dialog" aria-modal="true" aria-labelledby="mobileUnsupportedTitle" aria-describedby="mobileUnsupportedDescription">
+            <img class="mobile-unsupported-logo" src="./pwa-icon.svg?v=20260829-b05-1" alt="">
+            <p class="mobile-unsupported-eyebrow">Android 应用</p>
+            <h1 id="mobileUnsupportedTitle">下载 Android 应用</h1>
+            <p class="mobile-unsupported-description" id="mobileUnsupportedDescription">Android 7.0 及以上，约 827 MB。已内置词汇、教材和古典朗读，可离线使用。你也可以继续访问网页版。</p>
+            <div class="mobile-unsupported-actions">
+                <a class="mobile-unsupported-download" id="mobileUnsupportedDownload" href="https://download.kotobaflow.lol/android/kotobaflow-0.4.2-public-8d85707591da.apk" target="_blank" rel="noopener" download="KotobaFlow-0.4.2-Android.apk" data-apk-version="0.4.2" data-apk-bytes="826752298" data-apk-size="约 827 MB" aria-label="下载 Android 版 0.4.2，约 827 MB"><strong>下载 Android 版 0.4.2</strong><span>约 827 MB</span></a>
+                <button class="mobile-unsupported-continue" id="mobileUnsupportedContinue" type="button">继续访问网页版</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Unified global and module sidebar -->
+    <aside class="unified-sidebar" id="unifiedSidebar" aria-label="学习导航与当前模块工具">
+    <div class="status-bar app-header" id="statusBar" aria-label="全局学习导航">
+        <div class="app-brand-block">
+            <button class="app-brand" id="appBrandHome" type="button" aria-label="词基流动，返回今日首页">
+                <span class="app-brand-mark" aria-hidden="true">
+                    <img src="./pwa-icon.svg?v=20260829-b05-1" alt="">
+                </span>
+                <span class="app-brand-copy">
+                    <strong>词基流动</strong>
+                    <span id="appHeaderLocation">今日学习</span>
+                </span>
+            </button>
+            <button class="tablet-sidebar-toggle" id="tabletSidebarToggle" type="button" aria-expanded="false" aria-label="打开筛选侧栏" title="打开筛选侧栏">
+                <ui-icon name="filter"></ui-icon><span>筛选</span>
+            </button>
+        </div>
+
+        <nav class="module-switcher" id="moduleSwitcher" aria-label="主要模块">
+            <button class="mod-btn active" id="modBtnDashboard" data-module="dashboard" aria-current="page"><ui-icon name="target"></ui-icon><span class="mod-btn-label">今日</span></button>
+            <button class="mod-btn" id="modBtnLesson" data-module="lesson"><ui-icon name="book"></ui-icon><span class="mod-btn-label">课文</span></button>
+            <button class="mod-btn" id="modBtnGrammar" data-module="grammar"><ui-icon name="grammar"></ui-icon><span class="mod-btn-label">语法</span></button>
+            <button class="mod-btn" id="modBtnVocab" data-module="vocab"><ui-icon name="library"></ui-icon><span class="mod-btn-label">词汇</span></button>
+            <!-- Inserted when this copy has the classics library (CLASSICS-01). -->
+            <template id="modBtnClassicsTemplate"><button class="mod-btn" id="modBtnClassics" data-module="classics"><ui-icon name="scroll"></ui-icon><span class="mod-btn-label">古典</span></button></template>
+        </nav>
+
+        <div class="header-debug-status focused-ui-hidden" aria-hidden="true">
+            <span id="vocabStatusGroup">
+                <span class="status-item">总词条: <strong id="statusTotal">0</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item">筛选结果: <strong id="statusFiltered">0</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item">节点: <strong id="statusNodes">0</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item">边: <strong id="statusEdges">0</strong></span>
+                <span id="statusStudyWrap" style="display:none">
+                    <span class="status-sep">|</span>
+                    <span class="status-item">学习队列: <strong id="statusStudyQueue">0</strong></span>
+                </span>
+            </span>
+
+            <span id="grammarStatusGroup" style="display:none">
+                <span class="status-item">语法点: <strong id="statusGrammarTotal">0</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item">辅助课文: <strong id="statusLessons">0</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item gm-status-view" id="statusGrammarView">语法点视图</span>
+            </span>
+
+            <span id="textbookStatusGroup" style="display:none">
+                <span class="status-item">教材: <strong id="statusTextbookBook">-</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item">当前课文: <strong id="statusTextbookLesson">-</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item">词汇: <strong id="statusTextbookVocab">0</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item">语法: <strong id="statusTextbookGrammar">0</strong></span>
+            </span>
+
+            <span id="classicsStatusGroup" style="display:none">
+                <span class="status-item">作品: <strong id="statusClassicsBook">-</strong></span>
+                <span class="status-sep">|</span>
+                <span class="status-item">分部: <strong id="statusClassicsPart">-</strong></span>
+            </span>
+        </div>
+
+        <div class="status-right app-header-actions">
+            <button class="global-search-toggle" id="globalSearchToggle" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="globalSearchOverlay" title="全局搜索（Ctrl K）" aria-label="全局搜索（Ctrl K）"><ui-icon name="search"></ui-icon><span>搜索</span><kbd>Ctrl K</kbd></button>
+            <div class="progress-strip" id="progressStrip">
+                <div class="progress-metric">
+                    <span class="progress-label">今日</span>
+                    <strong id="progressTodayTime">00:00</strong>
+                </div>
+                <div class="progress-metric focused-ui-hidden">
+                    <span class="progress-label">打卡</span>
+                    <strong id="progressCheckinStatus">0%</strong>
+                </div>
+                <div class="progress-metric">
+                    <span class="progress-label">连续</span>
+                    <strong><span id="progressStreak">0</span>天</strong>
+                </div>
+                <button class="progress-calendar-toggle" id="progressCalendarToggle" type="button" title="学习记录" aria-label="打开每日学习记录" aria-controls="progressCalendar"><ui-icon name="calendar"></ui-icon></button>
+                <span class="progress-sync" id="progressSyncStatus" aria-live="polite"></span>
+                <div class="progress-calendar" id="progressCalendar" role="dialog" aria-label="每日学习记录">
+                    <div class="progress-calendar-grid contribution-graph" id="progressCalendarGrid"></div>
+                </div>
+            </div>
+            <span class="status-sep focused-ui-hidden">|</span>
+            <span class="status-mode focused-ui-hidden">视图: <strong id="statusViewMode">词卡模式</strong></span>
+            <button id="backToOverviewBtn" class="btn-back" style="display:none"><ui-icon name="arrow-left"></ui-icon>返回上级</button>
+            <div class="app-settings">
+                <button class="app-settings-toggle" id="appSettingsToggle" type="button" aria-expanded="false" aria-controls="appSettingsPanel" title="显示设置" aria-label="显示设置"><ui-icon name="settings"></ui-icon></button>
+                <div class="app-settings-panel" id="appSettingsPanel" hidden>
+                    <div class="app-settings-heading">
+                        <div><strong>显示设置</strong><span>调整这台设备上的阅读界面</span></div>
+                    </div>
+                    <fieldset class="app-settings-group">
+                    <legend>外观</legend>
+                    <label class="app-scale-control" title="页面显示缩放">
+                        <span>页面缩放</span>
+                        <select id="appScaleSelect">
+                            <option value="auto">自动</option>
+                            <option value="1">100%</option>
+                            <option value="1.25">125%</option>
+                            <option value="1.5">150%</option>
+                        </select>
+                    </label>
+                    <label class="app-theme-control" title="页面配色主题">
+                        <span>配色主题</span>
+                        <select id="appThemeSelect" aria-label="配色主题">
+                            <option value="light">浅色</option>
+                            <option value="dark">深色</option>
+                            <option value="auto">跟随系统</option>
+                        </select>
+                    </label>
+                    <button id="appAppearanceOpen" class="app-appearance-open" type="button" aria-haspopup="dialog" aria-controls="appearanceDialog"><span>配色与字体</span><small>预设 · 自定义 · 阅读预览</small><ui-icon name="chevron-right"></ui-icon></button>
+                    </fieldset>
+                    <fieldset class="app-settings-group">
+                    <legend>阅读</legend>
+                    <label class="app-density-control" title="页面布局密度">
+                        <span>布局密度</span>
+                        <select id="appDensitySelect" aria-label="布局密度">
+                            <option value="comfortable">舒适</option>
+                            <option value="compact">紧凑</option>
+                        </select>
+                    </label>
+                    <label class="app-density-control app-reading-layout-control" title="内容阅读排版：默认翻页；高密度一屏放更多，大字更易读，单页一次只看一页">
+                        <span>阅读排版</span>
+                        <select id="appReadingLayoutSelect" aria-label="阅读排版">
+                            <option value="book">翻页（默认）</option>
+                            <option value="dense">翻页（高密度）</option>
+                            <option value="large">翻页（大字）</option>
+                            <option value="single">翻页（单页）</option>
+                            <option value="scroll" hidden>连续滚动（旧版）</option>
+                        </select>
+                    </label>
+                    <button id="readingFocusEnter" class="reading-focus-enter" type="button" hidden><ui-icon name="book"></ui-icon><span>专注阅读</span><small>临时隐藏左侧栏</small></button>
+                    </fieldset>
+                    <fieldset class="app-settings-group">
+                    <legend>应用与数据</legend>
+                    <a id="appAboutLink" class="app-appearance-open" href="./privacy.html" target="_blank" rel="noopener"><span>关于本站</span><small>内容说明 · 隐私 · 联系 · 相关资源</small><ui-icon name="chevron-right"></ui-icon></a>
+                    <div class="app-pwa-status" id="appPwaStatus" data-pwa-state="starting" role="status" aria-live="polite">
+                        <span class="app-pwa-status-text" id="appPwaStatusText">正在准备离线缓存…</span>
+                        <button class="app-pwa-install" id="appPwaInstallBtn" type="button" hidden>安装应用</button>
+                    </div>
+                    <details class="app-settings-danger">
+                        <summary>数据管理</summary>
+                        <div class="app-settings-danger-body">
+                            <button id="appArchiveOpen" class="app-settings-danger-action" type="button">备份与恢复学习存档</button>
+                            <span>清除词汇状态、收藏、语法收藏和学习历史。</span>
+                            <button id="appClearStudyData" class="app-settings-danger-action" type="button"><ui-icon name="trash"></ui-icon>清空学习记录</button>
+                            <span id="appClearStudyDataStatus" class="app-settings-danger-status" role="status" aria-live="polite"></span>
+                        </div>
+                    </details>
+                    </fieldset>
+                    <button id="statusBarHideBtn" class="status-bar-action" type="button" title="折叠左侧栏" aria-label="折叠左侧栏" hidden><ui-icon name="chevron-left"></ui-icon><span><strong>折叠侧栏</strong><small>保留图标导航并隐藏模块工具</small></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="unified-module-sidebar-host" id="unifiedModuleSidebarHost" aria-label="当前模块工具"></div>
+    <div id="statusBarRevealControls" class="status-bar-reveal-controls" aria-label="显示控制">
+        <button id="fullscreenToggleBtn" class="status-bar-reveal" type="button" title="全屏显示" aria-label="全屏显示"><ui-icon name="maximize"></ui-icon><span>全屏显示</span></button>
+        <button id="statusBarShowBtn" class="status-bar-reveal" type="button" title="展开左侧栏" aria-label="展开左侧栏" aria-expanded="false" aria-pressed="false"><ui-icon name="chevron-right"></ui-icon><span>展开左侧栏</span></button>
+    </div>
+    </aside>
+    <button class="narrow-global-sidebar-backdrop" id="narrowGlobalSidebarBackdrop" type="button" aria-label="关闭左侧栏" aria-hidden="true" hidden></button>
+
+    <dialog id="appearanceDialog" class="appearance-editor" aria-labelledby="appearanceTitle" aria-describedby="appearanceDescription">
+        <header class="appearance-heading"><div><h2 id="appearanceTitle">配色与字体</h2><p id="appearanceDescription">从一套配色开始，调成适合自己的阅读界面。</p></div><button id="appearanceClose" type="button" aria-label="关闭配色与字体"><ui-icon name="x"></ui-icon></button></header>
+        <div class="appearance-body" id="appearanceBody">
+            <div class="appearance-controls">
+                <div class="appearance-mode-row"><label for="appearanceEditMode">编辑配色</label><select id="appearanceEditMode"><option value="light">浅色</option><option value="dark">深色</option></select><button id="appearancePreviewJump" type="button">查看阅读预览</button></div>
+                <p class="appearance-hint" id="appearanceModeHint"></p>
+                <div id="appearancePresets" class="appearance-presets" role="group" aria-label="配色预设"></div>
+                <div class="appearance-section-title"><h3>微调颜色</h3><button id="appearanceRestorePreset" type="button">恢复当前预设</button></div>
+                <div id="appearanceColors" class="appearance-colors"></div>
+                <p class="appearance-hint" id="appearanceColorHelp">颜色值支持 #RRGGBB / #RGB。</p>
+                <div class="appearance-fonts"><label>界面字体<select id="appearanceFont-ui"></select></label><label>日文正文与词头<select id="appearanceFont-japanese"></select></label></div>
+                <p class="appearance-hint">字体共用于浅色与深色。使用设备已有字体，缺字时自动回退。</p>
+                <div class="appearance-contrast"><p id="appearanceContrast" role="status"></p><button id="appearanceRepair" type="button" hidden>一键修正对比度</button></div>
+            </div>
+            <section id="appearancePreview" class="appearance-preview" data-theme="light" aria-label="阅读效果预览">
+                <div class="appearance-preview-heading"><span>阅读样例 · 仅预览</span><h3 id="appearancePreviewName" tabindex="-1"></h3></div>
+                <template id="appearanceSampleTemplate"><div class="appearance-sample-content"><article class="cc-card appearance-sample-card"><div class="cc-card-head"><span class="cc-level cc-lv-n5">N5</span><span class="appearance-sample-label">词汇卡片</span></div><div class="cc-card-body"><div class="cc-word" lang="ja">学生</div><div class="cc-reading" lang="ja">がくせい</div><p class="appearance-sample-meaning">学生 · 名词</p></div></article>
+                <article class="appearance-sample-reading"><span class="appearance-sample-label">新课程 1 · 第2课节选</span><h4 lang="ja">名前・仕事</h4><p lang="ja">こんにちは。私はリン・メイです。学生です。留学生です。国は中国です。大学はみなと大学です。</p><p class="appearance-sample-translation">大家好。我是林梅。我是学生，是留学生。我的国家是中国。我的大学是港湾大学。</p><p class="appearance-sample-meta">今日学习 12 分钟 · 复习 8 / 20 词</p><div class="appearance-sample-actions"><button id="appearancePreviewAction" type="button" class="btn-primary">继续学习</button><button id="appearancePreviewFavorite" type="button" aria-pressed="false">收藏</button></div><p id="appearancePreviewFeedback" class="appearance-sample-meta" aria-live="polite">可用 Tab 查看按钮的键盘焦点。</p></article></div></template>
+            </section>
+        </div>
+        <footer class="appearance-footer"><p id="appearanceStatus" role="status" aria-live="polite"></p><button id="appearanceReset" type="button">恢复默认外观</button><div><button id="appearanceCancel" type="button">取消</button><button id="appearanceApply" type="button">应用</button></div></footer>
+    </dialog>
+
+    <dialog id="archiveDialog" class="archive-dialog" aria-labelledby="archiveTitle">
+        <header><h2 id="archiveTitle">学习存档备份与恢复</h2><button id="archiveClose" type="button" aria-label="关闭存档管理">关闭</button></header>
+        <p>保存词汇、SRS、历史、学习计划、时长、阅读位置和未完成会话。换浏览器或域名前，请先下载备份。</p>
+        <div class="archive-actions"><button id="archiveExport" type="button">下载当前完整备份</button><button id="archiveBackup" type="button">下载恢复前页面备份</button><button id="archiveRemoteBackup" type="button">下载恢复前本机备份</button></div>
+        <label class="archive-file">选择备份文件（JSON，最多 8 MB）<input id="archiveFile" type="file" accept=".json,application/json"></label>
+        <section id="archivePreview" hidden aria-label="导入预览">
+            <p id="archiveCurrent"></p><p id="archiveIncoming"></p><p id="archiveRemote"></p>
+            <label>恢复方式<select id="archiveMode"><option value="merge">合并，保留当前计划和阅读位置</option><option value="replace">替换全部记录，采用导入的计划和位置</option></select></label>
+            <p>合并按词汇最近复习时间选择状态，收藏取并集，历史按会话去重，同一天时长取较大值；不会把两份时长相加。替换会覆盖当前页面及本机服务记录。恢复前会自动保留原记录备份。</p>
+        </section>
+        <p id="archiveStatus" role="status" aria-live="polite"></p>
+        <div class="archive-actions"><button id="archiveRestore" type="button" disabled>确认恢复</button><button id="archiveReload" type="button" hidden>重新加载应用</button></div>
+    </dialog>
+
+    <!-- Global search / command entry (UX-403) -->
+    <div class="global-search-overlay" id="globalSearchOverlay" hidden>
+        <div class="global-search-backdrop" data-global-search-close></div>
+        <section class="global-search-dialog" id="globalSearchDialog" role="dialog" aria-modal="true" aria-labelledby="globalSearchTitle">
+            <div class="global-search-heading">
+                <div><span class="global-search-kicker">快速入口</span><h2 id="globalSearchTitle">搜索词汇、语法和课文</h2></div>
+                <button class="global-search-close" type="button" data-global-search-close title="关闭搜索" aria-label="关闭搜索"><ui-icon name="x"></ui-icon></button>
+            </div>
+            <div class="global-search-input-wrap">
+                <ui-icon name="search" aria-hidden="true"></ui-icon>
+                <input id="globalSearchInput" type="search" autocomplete="off" spellcheck="false" placeholder="输入日文、读音、释义或课名" aria-label="搜索词汇、语法和课文" aria-controls="globalSearchResults" aria-autocomplete="list">
+                <kbd>Esc</kbd>
+            </div>
+            <div class="global-search-status" id="globalSearchStatus" role="status" aria-live="polite">输入关键词开始搜索</div>
+            <div class="global-search-results" id="globalSearchResults" role="listbox" aria-label="搜索结果"></div>
+        </section>
+    </div>
+
+    <div id="readingFocusBar" class="reading-focus-bar" aria-label="专注阅读控制" hidden>
+        <span id="readingFocusLocation">专注阅读</span>
+        <button id="readingFocusExit" type="button" title="退出专注阅读（Esc）"><ui-icon name="arrow-left"></ui-icon>退出专注</button>
+    </div>
+    <div class="app-container">
+        <button class="tablet-sidebar-backdrop" id="tabletSidebarBackdrop" type="button" aria-label="关闭筛选侧栏" aria-hidden="true" hidden></button>
+        <!-- Daily learning dashboard -->
+        <main class="dashboard-main" id="dashboardMain">
+            <div class="dashboard-loading state-view state-view--loading state-view--paper-loading" data-state-kind="loading" role="status" aria-live="polite" aria-busy="true">
+                <div class="loading-paper" aria-hidden="true"><div class="loading-paper-tools"><i></i><i></i><i></i><i></i></div><div class="loading-paper-spread"><div></div><div></div></div></div>
+                <div class="state-view-copy"><h3 class="state-view-title">正在准备今日学习</h3><p class="state-view-message">正在读取词库与学习进度…</p></div>
+            </div>
+        </main>
+
+        <!-- Vocabulary module -->
+        <aside class="sidebar" id="sidebar" style="display:none">
+            <div class="sidebar-header">
+                <h1>词汇</h1>
+                <div class="sidebar-header-right">
+                    <span class="badge" id="totalWordsBadge">0 词</span>
+                    <button class="panel-reset-btn" type="button" data-panel-reset="vocab" title="恢复词汇面板默认布局" aria-label="恢复词汇面板默认布局"><ui-icon name="rotate-ccw"></ui-icon></button>
+                    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" type="button" title="折叠词汇侧栏" aria-label="折叠词汇侧栏" aria-expanded="true" aria-controls="sidebar"><ui-icon name="chevron-left"></ui-icon></button>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label for="viewModeSelect">浏览方式</label>
+                    <select id="viewModeSelect">
+                        <option value="cards">词卡模式</option>
+                        <option value="list">紧凑列表</option>
+                        <option value="study">学习模式</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="searchInput">搜索词汇或释义</label>
+                    <input type="text" id="searchInput" placeholder="输入关键词即时筛选...">
+                </div>
+
+                <div class="filter-group focused-ui-hidden">
+                    <label for="graphModeSelect">图谱关系类型</label>
+                    <select id="graphModeSelect">
+                        <option value="domain">词 → 领域候选 (Domain)</option>
+                        <option value="semantic">词 → 语义标签候选 (Semantic Tag)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group vocab-quick-filter">
+                    <span class="filter-label">JLPT 常用筛选</span>
+                    <div class="vocab-level-chips" id="vocabLevelChips" aria-label="按 JLPT 等级筛选">
+                        <button class="vocab-filter-chip active" type="button" data-vocab-level="" aria-pressed="true">全部</button>
+                        <button class="vocab-filter-chip" type="button" data-vocab-level="N5" aria-pressed="false">N5</button>
+                        <button class="vocab-filter-chip" type="button" data-vocab-level="N4" aria-pressed="false">N4</button>
+                        <button class="vocab-filter-chip" type="button" data-vocab-level="N3" aria-pressed="false">N3</button>
+                        <button class="vocab-filter-chip" type="button" data-vocab-level="N2" aria-pressed="false">N2</button>
+                        <button class="vocab-filter-chip" type="button" data-vocab-level="N1" aria-pressed="false">N1</button>
+                    </div>
+                    <select id="levelSelect" class="vocab-filter-native" aria-hidden="true" tabindex="-1"><option value="">全部</option></select>
+                </div>
+
+                <details class="advanced-filters">
+                    <summary>高级筛选 <span>词性、领域、语义</span></summary>
+                    <div class="filter-group">
+                        <label for="posSelect">词性</label>
+                        <select id="posSelect"><option value="">全部</option></select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="domainSelect">领域</label>
+                        <select id="domainSelect"><option value="">全部</option></select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="semanticSelect">语义标签</label>
+                        <select id="semanticSelect"><option value="">全部</option></select>
+                    </div>
+                </details>
+
+                <details class="sidebar-tool-section" open>
+                    <summary>当前视图工具 <span>排序、显示与统计</span></summary>
+                    <div id="vocabViewTools" class="sidebar-view-tools"></div>
+                </details>
+
+                <div class="filter-group focused-ui-hidden">
+                    <label for="renderLimitSelect">最大渲染词条数</label>
+                    <select id="renderLimitSelect">
+                        <option value="0">自动</option>
+                        <option value="50">50</option>
+                        <option value="100" selected>100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                        <option value="2000">2000 ⚠️</option>
+                        <option value="4000">4000 ⚠️</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button id="applyFiltersBtn" type="button" hidden aria-hidden="true" tabindex="-1">应用筛选</button>
+                <button id="resetFiltersBtn" class="filter-reset-action" type="button" title="清除全部词汇筛选" aria-label="清除全部词汇筛选"><ui-icon name="rotate-ccw"></ui-icon>清除筛选</button>
+            </div>
+
+            <section class="vocab-plan-card" aria-label="当前词汇计划">
+                <span class="vocab-plan-kicker">今日词汇</span>
+                <div class="vocab-plan-count"><strong id="vocabPlanCount">0</strong><span>个词可学</span></div>
+                <p>每组最多 20 词，完成后再决定是否继续。</p>
+            </section>
+
+            <div class="filter-footer focused-ui-hidden">
+                <label class="toggle-label">
+                    <input type="checkbox" id="debugModeToggle">
+                    <span>Debug 数据透视</span>
+                </label>
+                <div class="match-info" id="matchInfo"></div>
+            </div>
+        </aside>
+        <div class="resize-handle sidebar-resize-handle" id="resizeSidebarVocab" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整词汇侧栏宽度" aria-controls="sidebar" title="拖拽或用方向键调整词汇侧栏宽度" style="display:none"></div>
+
+        <!-- Grammar module sidebar -->
+        <aside class="sidebar gm-sidebar" id="grammarSidebar" style="display:none">
+            <div class="sidebar-header">
+                <h1>语法</h1>
+                <div class="sidebar-header-right">
+                    <span class="badge gm-badge" id="grammarTotalBadge">0 条</span>
+                    <button class="panel-reset-btn" type="button" data-panel-reset="grammar" title="恢复语法面板默认布局" aria-label="恢复语法面板默认布局"><ui-icon name="rotate-ccw"></ui-icon></button>
+                    <button class="sidebar-collapse-btn" id="grammarSidebarCollapseBtn" type="button" title="折叠语法侧栏" aria-label="折叠语法侧栏" aria-expanded="true" aria-controls="grammarSidebar"><ui-icon name="chevron-left"></ui-icon></button>
+                </div>
+            </div>
+            <div id="gmSidebarContent" class="filter-section"></div>
+            <div id="gmCourseContext" class="gm-course-context" hidden></div>
+        </aside>
+        <div class="resize-handle sidebar-resize-handle" id="resizeSidebarGrammar" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整语法侧栏宽度" aria-controls="grammarSidebar" title="拖拽或用方向键调整语法侧栏宽度" style="display:none"></div>
+
+        <!-- Textbook module sidebar -->
+        <aside class="sidebar tb-sidebar" id="textbookSidebar" style="display:none">
+            <div class="sidebar-header">
+                <h1>课文</h1>
+                <div class="sidebar-header-right">
+                    <span class="badge tb-badge" id="textbookLessonCountBadge">0 课</span>
+                    <button class="panel-reset-btn" type="button" data-panel-reset="lesson" title="恢复课文面板默认布局" aria-label="恢复课文面板默认布局"><ui-icon name="rotate-ccw"></ui-icon></button>
+                    <button class="sidebar-collapse-btn" id="textbookSidebarCollapseBtn" type="button" title="折叠课文侧栏" aria-label="折叠课文侧栏" aria-expanded="true" aria-controls="textbookSidebar"><ui-icon name="chevron-left"></ui-icon></button>
+                </div>
+            </div>
+            <div id="tbSidebarContent" class="filter-section"></div>
+        </aside>
+        <div class="resize-handle sidebar-resize-handle" id="resizeSidebarTextbook" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整课文侧栏宽度" aria-controls="textbookSidebar" title="拖拽或用方向键调整课文侧栏宽度" style="display:none"></div>
+
+        <!-- Classics module sidebar (CLASSICS-01, local copies with data/classics_v1) -->
+        <aside class="sidebar tb-sidebar cl-sidebar" id="classicsSidebar" style="display:none">
+            <div class="sidebar-header">
+                <h1>古典</h1>
+                <div class="sidebar-header-right">
+                    <span class="badge tb-badge" id="classicsWorkCountBadge">0 部</span>
+                    <button class="panel-reset-btn" type="button" data-panel-reset="classics" title="恢复古典面板默认布局" aria-label="恢复古典面板默认布局"><ui-icon name="rotate-ccw"></ui-icon></button>
+                    <button class="sidebar-collapse-btn" id="classicsSidebarCollapseBtn" type="button" title="折叠古典侧栏" aria-label="折叠古典侧栏" aria-expanded="true" aria-controls="classicsSidebar"><ui-icon name="chevron-left"></ui-icon></button>
+                </div>
+            </div>
+            <div id="clSidebarContent" class="filter-section"></div>
+        </aside>
+        <div class="resize-handle sidebar-resize-handle" id="resizeSidebarClassics" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整古典侧栏宽度" aria-controls="classicsSidebar" title="拖拽或用方向键调整古典侧栏宽度" style="display:none"></div>
+
+        <!-- Vocabulary main content -->
+        <main class="graph-area" id="vocabMain" style="display:none">
+            <header class="page-heading page-heading--catalog" id="vocabHeading" data-scroll-autohide hidden></header>
+            <div id="graph-container"></div>
+            <div id="list-container" class="list-container" style="display:none"></div>
+            <div id="card-container" class="card-container" style="display:none"></div>
+            <div id="study-container" class="study-container" style="display:none"></div>
+
+            <div id="loading" class="overlay" role="status" aria-live="polite" aria-busy="true">
+                <div class="loading-paper" aria-hidden="true"><div class="loading-paper-tools"><i></i><i></i><i></i><i></i></div><div class="loading-paper-spread"><div></div><div></div></div></div>
+                <span class="state-view-title">数据加载中...</span>
+                <div class="loading-detail" id="loadingDetail"></div>
+            </div>
+
+            <div id="error-message" class="overlay hidden error-overlay" role="alert" aria-live="assertive"></div>
+
+            <div id="graphEmptyState" class="graph-empty-state" hidden></div>
+
+            <div class="graph-stats" id="graphStats">
+                节点: <strong id="nodeCount">0</strong> &nbsp;|&nbsp;
+                边: <strong id="edgeCount">0</strong>
+            </div>
+        </main>
+
+        <!-- Grammar main content -->
+        <main class="graph-area gm-main" id="grammarMain" style="display:none">
+            <header class="page-heading page-heading--catalog page-heading--grammar" id="grammarHeading" data-scroll-autohide hidden></header>
+            <div class="gm-subtab-bar" id="gmSubTabs"></div>
+            <div id="gmGrammarList" class="gm-subview-pane" style="display:none"></div>
+            <div id="gmLessonList" class="gm-subview-pane" style="display:none"></div>
+            <div id="gmLessonReader" class="gm-subview-pane" style="display:none"></div>
+
+            <div id="gmLoading" class="overlay hidden" role="status" aria-live="polite" aria-busy="true">
+                <div class="loading-spinner"></div>
+                <span class="state-view-title">语法数据加载中...</span>
+                <div class="loading-detail" id="gmLoadingDetail"></div>
+            </div>
+        </main>
+
+        <!-- Textbook main content -->
+        <main class="graph-area tb-main" id="textbookMain" style="display:none">
+            <div id="tbReader" class="tb-reader">
+                <div class="tb-reader-placeholder">选择左侧课文开始阅读</div>
+            </div>
+
+            <div id="tbLoading" class="overlay hidden" role="status" aria-live="polite" aria-busy="true">
+                <div class="loading-spinner"></div>
+                <span class="state-view-title">课文数据加载中...</span>
+                <div class="loading-detail" id="tbLoadingDetail"></div>
+            </div>
+        </main>
+
+        <!-- Classics main content -->
+        <main class="graph-area tb-main cl-main" id="classicsMain" style="display:none">
+            <div id="clReader" class="tb-reader cl-reader"></div>
+
+            <div id="clLoading" class="overlay hidden" role="status" aria-live="polite" aria-busy="true">
+                <div class="loading-spinner"></div>
+                <span class="state-view-title">古典资料加载中...</span>
+            </div>
+        </main>
+
+        <!-- Vocabulary detail panel -->
+        <div class="resize-handle detail-resize-handle" id="resizeHandleVocab" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整词汇详情宽度" aria-controls="detailPanel" title="拖拽或用方向键调整词汇详情宽度" style="display:none"></div>
+        <aside class="detail-panel detail-panel-collapsed" id="detailPanel" role="dialog" aria-modal="false" aria-labelledby="vocabDetailPanelTitle" aria-hidden="true" style="display:none">
+            <div class="detail-panel-header">
+                <h2 id="vocabDetailPanelTitle">词汇详情</h2>
+                <div class="panel-header-actions">
+                    <button class="panel-reset-btn" type="button" data-panel-reset="vocab" title="恢复词汇面板默认布局" aria-label="恢复词汇面板默认布局"><ui-icon name="rotate-ccw"></ui-icon></button>
+                    <button class="detail-collapse-btn" id="detailPanelCollapseBtn" type="button" title="展开词汇详情" aria-label="展开词汇详情" aria-expanded="false" aria-controls="detailPanel"><ui-icon name="chevron-left"></ui-icon></button>
+                </div>
+            </div>
+            <div id="detailContent" class="detail-content">
+                <div class="panel-empty-state"><ui-icon name="info"></ui-icon><strong>选择词汇查看详情</strong><p>点击词卡、列表词条或图谱节点后，这里会显示释义、例句和学习操作。</p></div>
+            </div>
+        </aside>
+
+        <!-- Grammar detail panel -->
+        <div class="resize-handle detail-resize-handle" id="resizeHandleGrammar" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整语法详情宽度" aria-controls="grammarDetailPanel" title="拖拽或用方向键调整语法详情宽度" style="display:none"></div>
+        <aside class="detail-panel detail-panel-collapsed gm-detail-panel" id="grammarDetailPanel" role="dialog" aria-modal="false" aria-labelledby="grammarDetailPanelTitle" aria-hidden="true" style="display:none">
+            <div class="detail-panel-header">
+                <h2 id="grammarDetailPanelTitle">语法详情</h2>
+                <div class="panel-header-actions">
+                    <button class="detail-reading-toggle" type="button" data-detail-reading-toggle aria-pressed="false" aria-controls="grammarDetailPanel">展开阅读</button>
+                    <button class="panel-reset-btn" type="button" data-panel-reset="grammar" title="恢复语法面板默认布局" aria-label="恢复语法面板默认布局"><ui-icon name="rotate-ccw"></ui-icon></button>
+                    <button class="detail-collapse-btn" id="grammarDetailCollapseBtn" type="button" title="展开语法详情" aria-label="展开语法详情" aria-expanded="false" aria-controls="grammarDetailPanel"><ui-icon name="chevron-left"></ui-icon></button>
+                </div>
+            </div>
+            <div id="gmDetailContent" class="detail-content gm-detail-content">
+                <div class="panel-empty-state"><ui-icon name="info"></ui-icon><strong>选择语法点查看详情</strong><p>点击中间列表中的语法卡片后，这里会显示接续、例句、辨析和练习。</p></div>
+            </div>
+        </aside>
+
+        <!-- Textbook detail panel -->
+        <div class="resize-handle detail-resize-handle" id="resizeHandleTextbook" role="separator" tabindex="0" aria-orientation="vertical" aria-label="调整课文词汇宽度" aria-controls="textbookDetailPanel" title="拖拽或用方向键调整课文词汇宽度" style="display:none"></div>
+        <aside class="detail-panel detail-panel-collapsed tb-detail-panel" id="textbookDetailPanel" role="dialog" aria-modal="false" aria-labelledby="textbookDetailPanelTitle" aria-hidden="true" style="display:none">
+            <div class="detail-panel-header">
+                <h2 id="textbookDetailPanelTitle">课文词汇详情</h2>
+                <div class="panel-header-actions">
+                    <button class="panel-reset-btn" type="button" data-panel-reset="lesson" title="恢复课文面板默认布局" aria-label="恢复课文面板默认布局"><ui-icon name="rotate-ccw"></ui-icon></button>
+                    <button class="detail-collapse-btn" id="textbookDetailCollapseBtn" type="button" title="展开课文词汇" aria-label="展开课文词汇" aria-expanded="false" aria-controls="textbookDetailPanel"><ui-icon name="chevron-left"></ui-icon></button>
+                </div>
+            </div>
+            <div id="tbDetailContent" class="detail-content tb-detail-content">
+                <div class="panel-empty-state"><ui-icon name="info"></ui-icon><strong>选择课文查看本课词汇</strong><p>进入一课后，这里会列出课内词汇；点击正文高亮可直接定位到对应词条。</p></div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Shared application infrastructure -->
+    <script src="./js/core/html.js?v=20260825-1"></script>
+    <script src="./js/core/example-audio.js?v=20261020-example-audio-2"></script>
+    <script src="./js/core/events.js?v=20260826-1"></script>
+    <script src="./js/core/site-pages.js?v=20261019-classics-1"></script>
+    <script src="./js/core/top-layer.js?v=20260828-a02-1"></script>
+    <script src="./js/appearance-settings.js?v=20261016-ui-art-25-1"></script>
+    <script src="./js/content-config.js?v=20261021-classics-public-1"></script>
+    <script src="./js/core/anchored-detail.js?v=20261001-drawer-detail-1"></script>
+    <script src="./js/core/state-view.js?v=20260827-1"></script>
+    <script src="./js/core/page-heading.js?v=20261002-kotobaflow-1"></script>
+    <script src="./js/core/book-turn.js?v=20261019-page-turn-fix-1"></script>
+    <script src="./js/core/book-pager.js?v=20261015-page-turn-1"></script>
+    <script src="./js/core/srs.js?v=20260826-1"></script>
+    <script src="./js/core/practice.js?v=20260928-content-review-1"></script>
+    <script src="./js/core/lexical-metadata.js?v=20261012-vocab-meta-02"></script>
+
+    <!-- Vocabulary module scripts -->
+    <script src="./js/taxonomy.js?v=1776619116"></script>
+    <script src="./js/loader.js?v=20260928-content-review-1"></script>
+    <script src="./js/storage-config.js?v=20260908-learning-plan-1"></script>
+    <script src="./js/storage.js?v=20260928-content-review-1"></script>
+    <script src="./js/progress-store.js?v=20261006-public-books-1"></script>
+    <script src="./js/core/archive.js?v=20261024-fix47-1"></script>
+    <script src="./js/archive-ui.js?v=20260908-learning-plan-1"></script>
+    <script src="./js/view-mode.js?v=1776619116"></script>
+    <script src="./js/vocab/graph-builders.js?v=20260826-1"></script>
+    <script src="./js/graph-builder.js?v=1776619116"></script>
+    <script src="./js/vocab/list-renderer.js?v=20260930-ui-merge-1"></script>
+    <script src="./js/vocab/list-events.js?v=20260826-1"></script>
+    <script src="./js/list-view.js?v=1776619116"></script>
+    <script src="./js/vocab/study-renderer.js?v=20260928-content-review-1"></script>
+    <script src="./js/vocab/study-events.js?v=20260928-content-review-1"></script>
+    <script src="./js/study-mode.js?v=20260928-content-review-1"></script>
+    <script src="./js/vocab/card-renderer.js?v=20261006-book-default-2"></script>
+    <script src="./js/vocab/card-events.js?v=20261006-book-default-2"></script>
+    <script src="./js/vocab/card-book.js?v=20261006-book-default-2"></script>
+    <script src="./js/card-mode.js?v=20261006-book-default-2"></script>
+    <script src="./js/filters.js?v=20260930-ui-merge-1"></script>
+    <script src="./js/detail-panel.js?v=20261016-example-audio-1"></script>
+    <script src="./js/vocab/audio-player.js?v=20261016-example-audio-1"></script>
+    <script src="./js/main.js?v=20260930-ui-merge-1"></script>
+    <script src="./js/dashboard.js?v=20261031-apk-download-1"></script>
+
+    <!-- Grammar module scripts -->
+    <script src="./js/grammar-inline-parser.js?v=20261024-fix45-1"></script>
+    <script src="./js/grammar-loader.js?v=1776619116"></script>
+    <script src="./js/grammar-detail.js?v=20261024-fix46-1"></script>
+    <script src="./js/grammar-list.js?v=20261006-book-default-2"></script>
+    <script src="./js/lesson-list.js?v=20260930-ui-merge-1"></script>
+    <script src="./js/lesson-reader.js?v=20261024-fix45-1"></script>
+    <script src="./js/grammar-book.js?v=20261006-book-default-2"></script>
+    <script src="./js/grammar-module.js?v=20261006-book-default-2"></script>
+  <script src="./js/textbook-loader.js?v=20261016-fix33-1"></script>
+  <script src="./js/textbook/vocab-renderer.js?v=20260928-content-review-1"></script>
+  <script src="./js/textbook/audio-controller.js?v=20261015-page-turn-1"></script>
+  <script src="./js/textbook/text-renderer.js?v=20261004-kotobaflow-1"></script>
+  <script src="./js/textbook/image-renderer.js?v=20261004-kotobaflow-1"></script>
+  <script src="./js/textbook/curriculum-renderer.js?v=20261006-book-default-2"></script>
+  <script src="./js/textbook/book-view.js?v=20261015-page-turn-1"></script>
+    <script src="./js/textbook-module.js?v=20261006-public-books-1"></script>
+    <script src="./js/classics/library.js?v=20261021-classics-public-1"></script>
+    <script src="./js/classics/reader.js?v=20261021-classics-fixes-1"></script>
+    <script src="./js/classics/module.js?v=20261021-classics-fixes-1"></script>
+    <script src="./js/panel-layout.js?v=20261019-classics-1"></script>
+    <script src="./js/tablet-layout.js?v=20261019-classics-1"></script>
+    <script src="./js/module-switcher.js?v=20261021-classics-fixes-1"></script>
+    <script src="./js/global-search.js?v=20261020-ui-art-28-2"></script>
+    <script src="./js/pwa.js?v=20261031-apk-download-1"></script>
+
+    <!-- Product header utilities -->
+    <script>
+    (function() {
+        function setupStatusBarToggle() {
+            var key = 'jp_learning_status_bar_hidden';
+            var body = document.body;
+            var hideBtn = document.getElementById('statusBarHideBtn');
+            var showBtn = document.getElementById('statusBarShowBtn');
+            function setHidden(hidden, persist) {
+                if (window.PanelLayout && window.PanelLayout.setUnifiedCollapsed && document.readyState !== 'loading') {
+                    window.PanelLayout.setUnifiedCollapsed(!!hidden, persist);
+                } else {
+                    body.classList.toggle('status-bar-collapsed', !!hidden);
+                    if (persist !== false) {
+                        try { localStorage.setItem(key, hidden ? '1' : '0'); } catch (err) {}
+                    }
+                }
+                if (showBtn) {
+                    var label = hidden ? '展开左侧栏' : '折叠左侧栏';
+                    showBtn.innerHTML = uiIcon(hidden ? 'chevron-right' : 'chevron-left') + '<span>' + label + '</span>';
+                    showBtn.title = label;
+                    showBtn.setAttribute('aria-label', label);
+                    showBtn.setAttribute('aria-pressed', hidden ? 'false' : 'true');
+                }
+                requestAnimationFrame(function() {
+                    if (window.PanelLayout && window.PanelLayout.refresh) window.PanelLayout.refresh();
+                });
+            }
+            var initialHidden = true;
+            setHidden(initialHidden, false);
+            if (hideBtn) hideBtn.addEventListener('click', function() { setHidden(true); });
+            if (showBtn) showBtn.addEventListener('click', function() {
+                if (window.PanelLayout && window.PanelLayout.toggleNarrowGlobal && window.PanelLayout.toggleNarrowGlobal()) return;
+                setHidden(!body.classList.contains('status-bar-collapsed'));
+            });
+        }
+
+        function setupAppSettings() {
+            var toggle = document.getElementById('appSettingsToggle');
+            var panel = document.getElementById('appSettingsPanel');
+            if (!toggle || !panel) return;
+            var closeTimer = 0;
+            var openFrame = 0;
+            var previousFocus = null;
+            function positionPanel() {
+                if (panel.hidden) return;
+                var scale = window.AppDisplayScale && window.AppDisplayScale.getScale
+                    ? window.AppDisplayScale.getScale() || 1
+                    : 1;
+                var viewportWidth = window.AppDisplayScale && window.AppDisplayScale.getLayoutWidth
+                    ? window.AppDisplayScale.getLayoutWidth()
+                    : window.innerWidth / scale;
+                var viewportHeight = window.AppDisplayScale && window.AppDisplayScale.getLayoutHeight
+                    ? window.AppDisplayScale.getLayoutHeight()
+                    : window.innerHeight / scale;
+                var toggleRect = toggle.getBoundingClientRect();
+                panel.style.width = '';
+                var anchor = {
+                    left: toggleRect.left / scale,
+                    right: toggleRect.right / scale,
+                    top: toggleRect.top / scale,
+                    bottom: toggleRect.bottom / scale
+                };
+                // FIX-38: offset sizes are layout px without the display zoom and
+                // without the 0.985 scale the panel still has while it opens.
+                var width = panel.offsetWidth || 286;
+                var height = panel.offsetHeight || 420;
+                var margin = 10;
+                var gap = 10;
+                var left = anchor.right + gap;
+                var side = 'right';
+                if (left + width > viewportWidth - margin) {
+                    if (anchor.left - width - gap >= margin) {
+                        left = anchor.left - width - gap;
+                        side = 'left';
+                    } else {
+                        // FIX-25: no room on either side (a phone at a large zoom,
+                        // or the opened sidebar of a phone, UI-ART-28). Narrow the
+                        // panel on the side with more room instead of covering
+                        // its toggle.
+                        var roomLeft = anchor.left - gap - margin;
+                        if (roomLeft > viewportWidth - margin - left) {
+                            width = Math.max(200, roomLeft);
+                            left = anchor.left - gap - width;
+                            side = 'left';
+                        } else {
+                            width = Math.max(200, viewportWidth - left - margin);
+                        }
+                        panel.style.width = width + 'px';
+                        height = panel.offsetHeight || height;
+                    }
+                }
+                left = Math.max(margin, Math.min(left, viewportWidth - width - margin));
+                var top = Math.max(margin, Math.min(anchor.top, viewportHeight - height - margin));
+                panel.style.left = Math.round(left) + 'px';
+                panel.style.top = Math.round(top) + 'px';
+                panel.style.right = 'auto';
+                panel.style.bottom = 'auto';
+                panel.setAttribute('data-anchor-side', side);
+            }
+            function setOpen(open, restoreFocus) {
+                if (closeTimer) {
+                    clearTimeout(closeTimer);
+                    closeTimer = 0;
+                }
+                if (open) {
+                    if (window.JPLearn.topLayer) window.JPLearn.topLayer.requestOpen('app-settings');
+                    panel.hidden = false;
+                    panel.classList.remove('is-closing');
+                    panel.classList.remove('is-open');
+                    positionPanel();
+                    if (openFrame) cancelAnimationFrame(openFrame);
+                    openFrame = requestAnimationFrame(function() {
+                        positionPanel();
+                        panel.classList.add('is-open');
+                    });
+                } else if (!panel.hidden) {
+                    panel.classList.remove('is-open');
+                    panel.classList.add('is-closing');
+                    closeTimer = setTimeout(function() {
+                        panel.hidden = true;
+                        panel.classList.remove('is-closing');
+                        closeTimer = 0;
+                    }, 190);
+                }
+                if (!open && window.JPLearn.topLayer) window.JPLearn.topLayer.release('app-settings');
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                toggle.title = open ? '关闭设置' : '显示设置';
+                toggle.setAttribute('aria-label', toggle.title);
+                if (!open) {
+                    var restore = restoreFocus ? previousFocus : null;
+                    previousFocus = null;
+                    if (restore && restore.isConnected) setTimeout(function() { restore.focus(); }, 0);
+                }
+            }
+            if (window.JPLearn.topLayer) {
+                window.JPLearn.topLayer.register('app-settings', {
+                    close: function(restoreFocus) { setOpen(false, restoreFocus); }
+                });
+            }
+            toggle.addEventListener('click', function(event) {
+                event.stopPropagation();
+                var opening = panel.hidden || panel.classList.contains('is-closing');
+                if (opening) {
+                    previousFocus = document.activeElement;
+                }
+                setOpen(opening, !opening);
+            });
+            panel.addEventListener('click', function(event) { event.stopPropagation(); });
+            document.addEventListener('click', function() { setOpen(false, false); });
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && !panel.hidden) {
+                    event.preventDefault();
+                    setOpen(false, true);
+                    return;
+                }
+                if (event.key === 'Tab' && !panel.hidden) {
+                    var focusables = panel.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), [href], [tabindex]:not([tabindex="-1"])');
+                    if (!focusables.length) return;
+                    var first = focusables[0];
+                    var last = focusables[focusables.length - 1];
+                    if (event.shiftKey && document.activeElement === first) {
+                        event.preventDefault();
+                        last.focus();
+                    } else if (!event.shiftKey && document.activeElement === last) {
+                        event.preventDefault();
+                        first.focus();
+                    }
+                }
+            });
+            var hideBtn = document.getElementById('statusBarHideBtn');
+            if (hideBtn) hideBtn.addEventListener('click', function() { setOpen(false, false); });
+            window.addEventListener('resize', positionPanel);
+            window.addEventListener('app:layout-viewport-change', positionPanel);
+            // FIX-38: content that changes the open panel's height (the offline
+            // status growing to two lines, 数据管理 opening) re-places it.
+            if (window.ResizeObserver) new ResizeObserver(positionPanel).observe(panel);
+            var clearStudyDataBtn = document.getElementById('appClearStudyData');
+            var clearStudyDataStatus = document.getElementById('appClearStudyDataStatus');
+            if (clearStudyDataBtn) {
+                clearStudyDataBtn.addEventListener('click', function() {
+                    if (!confirm('确定清空词汇状态、词汇与语法收藏、复习安排、学习历史和当前学习会话？学习计划、计时、阅读位置及外观保留。此操作不可撤销。')) return;
+                    var result = window.StudyStorage && window.StudyStorage.clearAll();
+                    var saved = result && (result.status === 'saved' || result.status === 'alreadySaved');
+                    if (clearStudyDataStatus) clearStudyDataStatus.textContent = saved
+                        ? '学习记录已清空'
+                        : '清空未确认，请保留站点数据并重新加载，恢复后再试。';
+                    positionPanel();
+                    if (clearStudyDataStatus) clearStudyDataStatus.scrollIntoView({ block: 'nearest' });
+                });
+            }
+        }
+
+        function setupFullscreenToggle() {
+            var btn = document.getElementById('fullscreenToggleBtn');
+            if (!btn) return;
+            function isFullscreen() {
+                return !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
+            }
+            function updateLabel() {
+                var active = isFullscreen();
+                btn.innerHTML = uiIcon(active ? 'minimize' : 'maximize') + '<span>' + (active ? '退出全屏' : '全屏显示') + '</span>';
+                btn.title = active ? '退出全屏' : '全屏显示';
+                btn.setAttribute('aria-label', active ? '退出全屏' : '全屏显示');
+            }
+            btn.addEventListener('click', function() {
+                if (isFullscreen()) {
+                    var exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+                    if (exit) exit.call(document);
+                    return;
+                }
+                var target = document.documentElement;
+                var request = target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen;
+                if (request) request.call(target);
+            });
+            document.addEventListener('fullscreenchange', updateLabel);
+            document.addEventListener('webkitfullscreenchange', updateLabel);
+            document.addEventListener('MSFullscreenChange', updateLabel);
+            updateLabel();
+        }
+
+        setupStatusBarToggle();
+        setupAppSettings();
+        setupFullscreenToggle();
+    })();
+    </script>
+</body>
+</html>

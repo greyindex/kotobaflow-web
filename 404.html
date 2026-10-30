@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN" class="standalone-document">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>页面不存在 · 词基流动</title>
+    <!-- Pages serves this file for missing URLs at any depth in the site root. -->
+    <script src="/js/theme.js?v=20261016-ui-art-25-1"></script>
+    <script src="/js/appearance.js?v=20261019-ui-art-27-1"></script>
+    <link rel="stylesheet" href="/style.css?v=20261021-loading-layers-1" />
+    <style>
+      html.standalone-document {
+        overflow: auto;
+      }
+      body.standalone-page {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100svh;
+        overflow: visible;
+        place-items: center;
+        padding: var(--space-6);
+        font: var(--type-body)/1.8 var(--font-ui);
+      }
+      .standalone-page main {
+        width: min(100%, 32rem);
+        padding: clamp(24px, 5vw, 48px);
+        border-block: 1px solid var(--c-rule-strong);
+        background: var(--surface-raised);
+        text-align: center;
+      }
+      .standalone-page h1 {
+        margin: 0 0 var(--space-3);
+        color: var(--c-primary);
+        font-size: var(--type-title);
+        line-height: 1.4;
+      }
+      .standalone-page p {
+        margin: 0 0 var(--space-4);
+        color: var(--c-ink-3);
+      }
+      .standalone-page a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--c-primary);
+        font-size: var(--type-ui);
+        font-weight: 700;
+        text-underline-offset: 0.2em;
+      }
+      .standalone-page a:hover {
+        color: var(--c-primary-hover);
+      }
+      .standalone-page a:focus-visible {
+        outline: 2px solid var(--c-focus);
+        outline-offset: 4px;
+      }
+    </style>
+  </head>
+  <body class="standalone-page">
+    <main>
+      <h1>这里没有学习内容</h1>
+      <p>这个地址不存在，或者相关功能尚未公开。</p>
+      <a class="standalone-back" href="/">返回今日学习</a>
+    </main>
+  </body>
+</html>
