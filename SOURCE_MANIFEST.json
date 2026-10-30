@@ -76,8 +76,10 @@
     },
     {
       "path": "js/content-config.js",
-      "bytes": 1382,
-      "sha256": "e37c2d6197b6456608340089e0fb021fb41247afa425c09e0ffcd76c8e27f9d9"
+      "bytes": 1443,
+      "sha256": "964211dceb3f8d77cb0ba6c0bdf2b0a89c21a500c1607d4d2751668a7db233c0",
+      "source_sha256": "e37c2d6197b6456608340089e0fb021fb41247afa425c09e0ffcd76c8e27f9d9",
+      "transformation": "Public-only four-book configuration or resource installation/build boundary; private application repositories unchanged."
     },
     {
       "path": "js/core/anchored-detail.js",
@@ -437,8 +439,10 @@
     },
     {
       "path": "resources/licenses/THIRD_PARTY_NOTICES.md",
-      "bytes": 5623,
-      "sha256": "e5f0770587e1c7e990b84b6ac27127a1e33a5a1c588beec3309f98156ec27925"
+      "bytes": 5928,
+      "sha256": "21f580c242c3a82320194432917c67f3314c1372736634cc241cbd6204d9b5fe",
+      "source_sha256": "e5f0770587e1c7e990b84b6ac27127a1e33a5a1c588beec3309f98156ec27925",
+      "transformation": "Public-only four-book configuration or resource installation/build boundary; private application repositories unchanged."
     },
     {
       "path": "resources/licenses/public-release-policy.json",
@@ -487,8 +491,10 @@
     },
     {
       "path": "sw-manifest.js",
-      "bytes": 202844,
-      "sha256": "bbdd0198460de9608ff79cfcbb550790ab4446711adb834f4404c94d933db217"
+      "bytes": 108633,
+      "sha256": "15d0ba2846d85e13225967e9d1a398f0ebd06ab69c94575d32006f468d929edf",
+      "source_sha256": "bbdd0198460de9608ff79cfcbb550790ab4446711adb834f4404c94d933db217",
+      "transformation": "Public-only four-book configuration or resource installation/build boundary; private application repositories unchanged."
     },
     {
       "path": "sw.js",
@@ -817,8 +823,10 @@
     },
     {
       "path": "tools/build_public_release.cjs",
-      "bytes": 8450,
-      "sha256": "f89d51e0b3a706c146a2b3cd25b15fbf8fb01f2e8deb98d8bae1f93608de681b"
+      "bytes": 8468,
+      "sha256": "acfe02c3315348e2cfa048da91cf9d6b7a359e997297358bc88f5e689cdd51b7",
+      "source_sha256": "f89d51e0b3a706c146a2b3cd25b15fbf8fb01f2e8deb98d8bae1f93608de681b",
+      "transformation": "Public-only four-book configuration or resource installation/build boundary; private application repositories unchanged."
     },
     {
       "path": "tools/build_site_pages.cjs",
@@ -837,13 +845,17 @@
     },
     {
       "path": "tools/check_public_release.cjs",
-      "bytes": 14417,
-      "sha256": "abf033e22928cee7e069620932573388263db8a819f37e40cfceec53b42c5fda"
+      "bytes": 15554,
+      "sha256": "2aa83af6a04742447c185b88f10379f4beb5a81f0330bba60bb30fa6dbcb9a4c",
+      "source_sha256": "abf033e22928cee7e069620932573388263db8a819f37e40cfceec53b42c5fda",
+      "transformation": "Public-only four-book configuration or resource installation/build boundary; private application repositories unchanged."
     },
     {
       "path": "tools/check_public_release.test.cjs",
-      "bytes": 24885,
-      "sha256": "63de54cc08d855d9406367484870f630b00d1e0ad8c0a47259df8ac6f001a24e"
+      "bytes": 25048,
+      "sha256": "77c87a49cd13ed1418784f470e5c37993d12d1efbbcf62c8671facfe71719ccf",
+      "source_sha256": "63de54cc08d855d9406367484870f630b00d1e0ad8c0a47259df8ac6f001a24e",
+      "transformation": "Public-only four-book configuration or resource installation/build boundary; private application repositories unchanged."
     },
     {
       "path": "tools/classics_public.cjs",
@@ -1095,5 +1107,6 @@
       "bytes": 61103,
       "sha256": "7cd39f85cec26182387fa9ad67d36a0d0f3f8e5e97d5fd7d401604641ed036a7"
     }
-  ]
+  ],
+  "resource_repository": "https://github.com/greyindex/kotobaflow-resources"
 }

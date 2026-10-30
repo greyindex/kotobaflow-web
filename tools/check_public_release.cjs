@@ -39,6 +39,25 @@ function lessonPassages(root, books) {
   return passages;
 }
 function withheldPassages(root) {
+  // Public source checkouts never need the withheld textbook text itself.
+  if (!fs.existsSync(path.join(root, 'data/textbook/book_chunks/XinBian1.json'))) {
+    const file = path.join(root, 'data/public-boundary/withheld-passage-sha256.json');
+    if (!fs.existsSync(file)) throw new Error('Install the public resource boundary fingerprints first');
+    const snapshot = JSON.parse(fs.readFileSync(file, 'utf8'));
+    if (
+      snapshot.schema !== 1 ||
+      snapshot.algorithm !== 'sha256' ||
+      !Array.isArray(snapshot.passages) ||
+      !snapshot.passages.length ||
+      snapshot.passages.length > 50000 ||
+      !snapshot.passages.every((value) => /^[a-f0-9]{64}$/.test(value)) ||
+      new Set(snapshot.passages).size !== snapshot.passages.length
+    )
+      throw new Error('Invalid public resource boundary fingerprints');
+    const result = new Set(snapshot.passages);
+    result.hashed = true;
+    return result;
+  }
   const passages = lessonPassages(root, WITHHELD_TEXTBOOKS);
   for (const shared of lessonPassages(root, PUBLIC_TEXTBOOKS)) passages.delete(shared);
   if (!passages.size) throw new Error('No withheld textbook text found');
@@ -49,7 +68,10 @@ function withheldTextIn(text, passages) {
     .replace(/<[^>]*>/g, '\n')
     .split(SENTENCE_BREAK)
     .map(passageKey)
-    .filter((key) => key && passages.has(key));
+    .filter(
+      (key) =>
+        key && passages.has(passages.hashed ? crypto.createHash('sha256').update(key).digest('hex') : key),
+    );
 }
 
 function checkRelease(directory, policy, options = {}) {
@@ -320,3 +342,6 @@ if (require.main === module) {
   }
 }
 module.exports = { checkRelease, withheldPassages, withheldTextIn };
+
+// Exposed for the public resource boundary contract tests.
+module.exports.withheldTextIn = withheldTextIn;

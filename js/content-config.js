@@ -14,7 +14,7 @@
     'KotobaFlow3',
     'KotobaFlow4',
   ];
-  var offered = null; // null: every book
+  var offered = ['KotobaFlow1', 'KotobaFlow2', 'KotobaFlow3', 'KotobaFlow4']; // public source edition
   // Reading library data is built by tools/build_classics_library.cjs.
   // Local copies use the adjacent audio; public releases use the R2 base.
   var classics = true;

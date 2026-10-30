@@ -1,3 +1,5 @@
+2026-10-31 update: public data and media are maintained separately at https://github.com/greyindex/kotobaflow-resources with the owner-authorized resource scope and third-party notices. The pending entries below record the earlier source inventory; they do not supersede the resource repository notices.
+
 # Third-party notices and release-risk register
 
 This is an inventory for maintenance and release review. It is not legal advice and does not by itself grant permission to redistribute textbook content, generated audio, models, or images. Entries marked `pending` require evidence or a deliberate distribution decision before any public release.

@@ -490,11 +490,16 @@ test('PUB-FIX-04 a withheld textbook sentence in the page shell blocks the relea
 test('PUB-FIX-04 the repository page shell quotes no withheld XinBian sentence', () => {
   const root = path.join(__dirname, '..');
   const withheld = withheldPassages(root);
-  const folder = path.join(root, 'data/textbook/book_chunks');
-  const catalog = JSON.parse(fs.readFileSync(path.join(folder, 'XinBian1.json'), 'utf8'));
-  const lesson = JSON.parse(fs.readFileSync(path.join(folder, catalog.lessons.lesson_02), 'utf8'));
-  // The appearance preview once quoted the opening of this lesson.
-  assert.ok(withheldTextIn('<p lang="ja">' + lesson.lesson.body.text + '</p>', withheld).length);
+  if (withheld.hashed) {
+    assert.ok(withheld.size > 100);
+    assert.ok([...withheld].every((value) => /^[a-f0-9]{64}$/.test(value)));
+  } else {
+    const folder = path.join(root, 'data/textbook/book_chunks');
+    const catalog = JSON.parse(fs.readFileSync(path.join(folder, 'XinBian1.json'), 'utf8'));
+    const lesson = JSON.parse(fs.readFileSync(path.join(folder, catalog.lessons.lesson_02), 'utf8'));
+    // The appearance preview once quoted the opening of this lesson.
+    assert.ok(withheldTextIn('<p lang="ja">' + lesson.lesson.body.text + '</p>', withheld).length);
+  }
   const shell = ROOT_FILES.filter((file) => /\.(?:html|js|css)$/.test(file)).concat('privacy.html');
   const visit = (folderPath) => {
     for (const item of fs.readdirSync(path.join(root, folderPath), { withFileTypes: true })) {
