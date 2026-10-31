@@ -4307,6 +4307,9 @@ body.debug-mode .cc-debug-row { display: flex; }
       color: var(--gm-text); border-right: 1px solid var(--gm-border);
 }
 .gm-para-zh {     color: var(--gm-text-sec); }
+/* GRAMMAR-LESSON-02: dates, dialogue turns and letter salutations break lines inside a paragraph */
+.gm-para-ja,
+.gm-para-zh { white-space: pre-line; }
 .gm-display-ja-only .gm-para-ja { border-right: none; }
 
 /* Inline grammar marks */

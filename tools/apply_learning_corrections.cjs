@@ -7,6 +7,40 @@ const resourceRevisions = require('./reviewed_resource_revisions.cjs');
 const lexicalMetadata = require('../js/core/lexical-metadata.js');
 const manifestPath = 'resources/quality/learning-content-corrections-2026-09-23.json';
 const revisionManifestPath = resourceRevisions.manifestPath;
+// GRAMMAR-LESSON-02 replaced the grammar lessons; see tools/build_grammar_lessons.cjs.
+const lessonRewritePath = 'resources/quality/grammar-lessons-v2-2026-10-31.json';
+const lessonRewriteFile = 'data/grammar_lessons.json';
+
+function readLessonRewrite(root) {
+  const absolute = path.join(root, lessonRewritePath);
+  if (!fs.existsSync(absolute)) return null;
+  const manifest = JSON.parse(fs.readFileSync(absolute, 'utf8'));
+  if (
+    manifest.schemaVersion !== 1 ||
+    !Array.isArray(manifest.superseded) ||
+    !Array.isArray(manifest.relocated)
+  )
+    throw Error('Invalid grammar lesson rewrite manifest');
+  const byId = new Map(manifest.superseded.map((id) => [id, null]));
+  for (const entry of manifest.relocated) byId.set(entry.id, entry);
+  return byId;
+}
+
+// Returns undefined when the correction is not affected, null when the rewrite superseded it, or the
+// new path of a relocated grammar point field.
+function lessonRewriteTarget(rewrite, file, document, id) {
+  if (!rewrite || file !== lessonRewriteFile || !rewrite.has(id)) return undefined;
+  if (!Array.isArray(document) || !document.every((lesson) => lesson && typeof lesson.seed === 'string'))
+    return undefined;
+  const entry = rewrite.get(id);
+  if (entry === null) return null;
+  for (let i = 0; i < document.length; i++) {
+    const points = document[i].grammar_points || [];
+    const j = points.findIndex((point) => point && point.uid === entry.uid);
+    if (j >= 0) return [i, 'grammar_points', j, entry.field];
+  }
+  throw Error('Relocated grammar point missing: ' + id);
+}
 
 function propertyAt(document, keys, label) {
   if (!Array.isArray(keys) || !keys.length) throw Error('Missing JSON path: ' + label);
@@ -88,7 +122,11 @@ function validateStructuredLexicalRow(row, id) {
     throw Error('Invalid structured lexical metadata review: ' + id);
 }
 
-function processCorrections(root, manifest, { apply = false, revisions = null, followups = null } = {}) {
+function processCorrections(
+  root,
+  manifest,
+  { apply = false, revisions = null, followups = null, lessonRewrite = undefined } = {},
+) {
   if (manifest.schemaVersion !== 1 || !Array.isArray(manifest.corrections))
     throw Error('Invalid learning correction manifest');
   const files = new Map();
@@ -138,8 +176,11 @@ function processCorrections(root, manifest, { apply = false, revisions = null, f
   let pending = 0;
   let alreadyApplied = 0;
   let metadataSuperseded = 0;
+  let lessonRewriteSuperseded = 0;
+  if (lessonRewrite === undefined) lessonRewrite = readLessonRewrite(root);
   for (const correction of manifest.corrections) {
-    const { id, file, path: keys, guards, before, after, reason, evidence } = correction;
+    const { id, file, guards, before, after, reason, evidence } = correction;
+    let keys = correction.path;
     if (
       !id ||
       ids.has(id) ||
@@ -158,10 +199,17 @@ function processCorrections(root, manifest, { apply = false, revisions = null, f
     targets.add(target);
     const state = loadDocument(root, files, file, id);
     if (!Array.isArray(guards) || !guards.length) throw Error('Missing identity guard: ' + id);
-    for (const guard of guards) {
-      if (!isDeepStrictEqual(propertyAt(state.document, guard.path, id), guard.value))
-        throw Error('Correction identity changed; review required: ' + id);
+    const rewritten = lessonRewriteTarget(lessonRewrite, file, state.document, id);
+    if (rewritten === null) {
+      lessonRewriteSuperseded++;
+      continue;
     }
+    if (rewritten) keys = rewritten;
+    else
+      for (const guard of guards) {
+        if (!isDeepStrictEqual(propertyAt(state.document, guard.path, id), guard.value))
+          throw Error('Correction identity changed; review required: ' + id);
+      }
     const current = propertyAt(state.document, keys, id);
     const metadataField = ['pos', 'transitivity', 'register', 'style'].includes(String(keys.at(-1)));
     const indexedVocabularyRow =
@@ -296,6 +344,7 @@ function processCorrections(root, manifest, { apply = false, revisions = null, f
     applied: apply ? pending : 0,
     alreadyApplied,
     metadataSuperseded,
+    lessonRewriteSuperseded,
     revisions: revisions ? revisions.revisions.length : 0,
     revisionsApplied: apply ? revisionPending : 0,
     revisionsAlreadyApplied: revisionAlreadyApplied,

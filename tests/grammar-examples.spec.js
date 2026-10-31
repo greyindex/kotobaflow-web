@@ -141,9 +141,9 @@ test('auxiliary lesson briefs show the marked grammar in bold, not as [[ ]]', as
 
   const briefs = page.locator('#gmReaderTargets .gm-brief-card');
   await expect(briefs.first()).toBeVisible();
-  const sample = briefs.first().locator('.gm-brief-sample-ja');
-  await expect(sample).toHaveText('我々のささやかな幸福も、共産党の正しい指導あってのものです。');
-  await expect(sample.locator('strong')).toHaveText('あっての');
+  const sample = briefs.nth(1).locator('.gm-brief-sample-ja');
+  await expect(sample).toHaveText('店に卵がひとつもありません。');
+  await expect(sample.locator('strong')).toHaveText('ひとつ');
   for (const text of await briefs.allTextContents()) expect(text).not.toMatch(/\[\[|\]\]/);
 
   // Some translations are marked too, a sample can hold two marks, and text
@@ -161,28 +161,35 @@ test('auxiliary lesson briefs show the marked grammar in bold, not as [[ ]]', as
   expect(errors).toEqual([]);
 });
 
-// Chinese paragraphs carry the grammar marks of the Japanese text, mostly as
-// [[UID::TEXT]]. They show the marked words in bold only: the Japanese
-// paragraphs keep the clickable grammar.
+// The rewritten lessons (GRAMMAR-LESSON-02) mark grammar only in the Japanese
+// paragraphs, which keep the clickable grammar; Chinese paragraphs stay plain.
+// Letter salutations, diary dates and dialogue turns break lines inside a
+// paragraph in both languages.
 test('auxiliary lesson Chinese paragraphs show marked grammar in bold only', async ({ page }) => {
   await useBrowserStorage(page);
   const errors = await openReadyApp(page, { module: 'grammar' });
   await revealControl(page.locator('#gmSideNavLesson'));
   await page.locator('#gmSideNavLesson').click();
-  await revealControl(page.locator('.gm-lesson-card').nth(1));
-  await page.locator('.gm-lesson-card').nth(1).click();
+  await revealControl(page.locator('.gm-lesson-card').nth(2));
+  await page.locator('.gm-lesson-card').nth(2).click();
 
   const reader = page.locator('#gmLessonReader');
   const chinese = reader.locator('.gm-para-zh');
-  await expect(chinese).toHaveCount(6);
-  await expect(chinese.filter({ hasText: '开门的铃声刚刚响过' }).locator('strong')).toHaveText(['刚刚响过']);
-  await expect(chinese.locator('strong')).toHaveCount(10);
+  await expect(chinese).toHaveCount(5);
   await expect(chinese.locator('button')).toHaveCount(0);
   for (const text of await chinese.allTextContents()) expect(text).not.toMatch(/\[\[|\]\]|::/);
   await expect(reader.locator('.gm-para-ja button.gm-grammar-known').first()).toBeAttached();
+  for (const [selector, firstLine] of [
+    ['.gm-para-ja', '母さんへ'],
+    ['.gm-para-zh', '母亲：'],
+  ]) {
+    const paragraph = reader.locator(selector).first();
+    await expect(paragraph).toHaveCSS('white-space', 'pre-line');
+    expect((await paragraph.innerText()).split('\n')[0]).toBe(firstLine);
+  }
 
-  // Paragraphs without a uid in their marks (lesson 73) and markup inside a
-  // mark take the same path.
+  // Older marks in Chinese text, marks without a uid and markup inside a mark
+  // render as escaped bold text.
   const html = await page.evaluate(() =>
     window.GrammarInlineParser.renderStrong('车[[还没]]来[[N1-019::<b>]]'),
   );

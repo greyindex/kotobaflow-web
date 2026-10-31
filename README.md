@@ -37,7 +37,7 @@ SHA-256：`8d85707591da836322374984626307856c6aed47922d68890a337a885e6338e9`。
 
 ```powershell
 git clone https://github.com/greyindex/kotobaflow-resources.git
-python kotobaflow-resources/install_resources.py --profile web-2026-10-31 --target C:\path\to\kotobaflow-web
+python kotobaflow-resources/install_resources.py --profile web-2026-10-31-r2 --target C:\path\to\kotobaflow-web
 cd C:\path\to\kotobaflow-web
 npm ci
 python scripts/check-public-source.py

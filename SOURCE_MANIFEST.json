@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
   "source_commits": {
-    "web": "cef1c7ff99f4ab7989c70b58eca261a6bc866d9d"
+    "web": "f72255520c3ae5ec8bac55595f0e4879dc0a10cc"
   },
   "files": [
     {
@@ -31,13 +31,13 @@
     },
     {
       "path": "grammar/index.html",
-      "bytes": 61006,
-      "sha256": "8ffd866485bcabc63c6d8a34948b78b94070e4180c57b7d32da92f21e76338d1"
+      "bytes": 61009,
+      "sha256": "256b43b9375cb9cb9c36333add3b7ecf03f01d46fec11144a7c4386f34acae36"
     },
     {
       "path": "index.html",
-      "bytes": 60978,
-      "sha256": "464f8f8524f8697d9fe01bd91fdd31c1cb7f54b2903e24912e2f135c2ea51026"
+      "bytes": 60981,
+      "sha256": "6722088410c5e52a23da3946096564690fa867be4a3446000256a1652922cf10"
     },
     {
       "path": "js/appearance-settings.js",
@@ -455,6 +455,11 @@
       "sha256": "7b2a05b5029956442a05457a7f554b4283aeb8b13b3126050954791f87d7cd89"
     },
     {
+      "path": "resources/provenance/SOURCES.md",
+      "bytes": 6602,
+      "sha256": "a5c64df92620731fc7bc70ea3e9e856fcdb3ae4e94f2fada8d8a9f28ee370664"
+    },
+    {
       "path": "resources/schemas/README.md",
       "bytes": 2765,
       "sha256": "be09264ec9c268bbb53f1246aacbfc4ecf030d0e25b4e1e686098aaea94872cb"
@@ -486,14 +491,14 @@
     },
     {
       "path": "style.css",
-      "bytes": 422840,
-      "sha256": "ea293b5bc233ed736b5056242234dd4e1b65b026543b5ba5947c609467e0d27e"
+      "bytes": 422993,
+      "sha256": "14277455ad9933d74fda7528fd8cbdf12f534956526529e8b356c459ed542573"
     },
     {
       "path": "sw-manifest.js",
       "bytes": 108633,
-      "sha256": "15d0ba2846d85e13225967e9d1a398f0ebd06ab69c94575d32006f468d929edf",
-      "source_sha256": "bbdd0198460de9608ff79cfcbb550790ab4446711adb834f4404c94d933db217",
+      "sha256": "48778d2d03a3f5f54f25ab217cd2f66e953d008cec41b3399f73d502cd3846eb",
+      "source_sha256": "f44962173cab03688c69af0df97cb0ee61f8ee0aaba77cd5e81cefcff79b207e",
       "transformation": "Public-only four-book configuration or resource installation/build boundary; private application repositories unchanged."
     },
     {
@@ -583,8 +588,8 @@
     },
     {
       "path": "tests/grammar-examples.spec.js",
-      "bytes": 13084,
-      "sha256": "f095cb8732f89380a7ce25af04c8260dbaa705c0a021ea2b7fba8702b9222e3a"
+      "bytes": 13248,
+      "sha256": "79f7da4cf546b1fb98b7a735940d9c8898d0880aa52f6c4d590d352878d01e46"
     },
     {
       "path": "tests/helpers.js",
@@ -748,8 +753,8 @@
     },
     {
       "path": "textbook/index.html",
-      "bytes": 61073,
-      "sha256": "efaed0441fdfcf720975b03a1a65be664e662558c761681910187c96b7f340b8"
+      "bytes": 61076,
+      "sha256": "c8de1b286480e60ee89d82bb45306fafffa0f785bcb1e035749cee4514b1a187"
     },
     {
       "path": "tools/align_gemini_dialogue_pilot.py",
@@ -768,8 +773,8 @@
     },
     {
       "path": "tools/apply_learning_corrections.cjs",
-      "bytes": 13528,
-      "sha256": "8aa7e7fc927ee5381cc4ce455f088fe1f1cda53d097825dda1d3869d53e313e8"
+      "bytes": 15510,
+      "sha256": "7099475d71a1b32f5073de059971e4c60d3710104345225aa248f1c879714527"
     },
     {
       "path": "tools/apply_lexical_metadata.cjs",
@@ -820,6 +825,11 @@
       "path": "tools/build_grammar_chunks.cjs",
       "bytes": 1833,
       "sha256": "8ed4f34bacad2f07e53521d33db17056e72eb5dcf274efba6ba812a9778034d8"
+    },
+    {
+      "path": "tools/build_grammar_lessons.cjs",
+      "bytes": 6718,
+      "sha256": "69713db804a741a1c76d141b40ac46b190787c521aa6186461e5760b8d41c124"
     },
     {
       "path": "tools/build_public_release.cjs",
@@ -938,6 +948,16 @@
       "sha256": "a320ba7818af47328b778b95038259fcc1fee86c04ca09d7d476f1751ce36648"
     },
     {
+      "path": "tools/grammar_lesson_drafts.cjs",
+      "bytes": 4624,
+      "sha256": "637b666ec18abb8bc666c0c370344dc63b7f83200d5088cbbd0ee8f6f63ae30a"
+    },
+    {
+      "path": "tools/grammar_lessons_seeds.json",
+      "bytes": 24461,
+      "sha256": "2900246c0325c93dfe6f27e3c757e2135fded662bfa368ed2668a0e9bc94f4b5"
+    },
+    {
       "path": "tools/install_kotobaflow_audio.py",
       "bytes": 15157,
       "sha256": "3296ed34fec10d11e0298101d6c53bc9ea34130a98892e940093553e41da166c"
@@ -986,6 +1006,11 @@
       "path": "tools/measure_loading.cjs",
       "bytes": 6404,
       "sha256": "9841bc2d43b8a0b4b1d45fb737c855c20a9edc1d1db300a884174886595ee710"
+    },
+    {
+      "path": "tools/plan_grammar_lessons.cjs",
+      "bytes": 7514,
+      "sha256": "ea1e5829f28a59c89843372971f39b0ddacf71b18be04e9f9f64f06ab810a8fc"
     },
     {
       "path": "tools/prepare_gemini_playback.py",
@@ -1104,8 +1129,8 @@
     },
     {
       "path": "vocabulary/index.html",
-      "bytes": 61103,
-      "sha256": "7cd39f85cec26182387fa9ad67d36a0d0f3f8e5e97d5fd7d401604641ed036a7"
+      "bytes": 61106,
+      "sha256": "58dcf63156f736617fbe797c4964621ec7d30324f06d213258a67e505f980ca4"
     }
   ],
   "resource_repository": "https://github.com/greyindex/kotobaflow-resources"
